@@ -4,7 +4,7 @@
     --casillaColor:#00a5f7;
 }   
 *{
-    font-family: 'Comme', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -29,7 +29,7 @@ html::-webkit-scrollbar-thumb{
     border-radius: 5rem;
 }
 body{
-    background-image: url("../img/bg.jpg");
+    background-image: url("../img/bg_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -39,11 +39,20 @@ body{
     width: 90%;
     margin: 0 auto;
 }
-
+.btn{
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    background: #0c22a1;
+    padding: 1.5rem;
+    border-radius: 15px;
+}
 
 
 
 .game__tictactoe{
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,23 +61,28 @@ body{
 }
 .game__tictactoe h1{
     font-size: 4rem;
+    text-align: center;
 }
 .game__info{
-    padding: 0.5rem;
-    margin: 1rem 0;
+    background-color: #00a5f7;
+    padding: 0.5rem 2rem;
+    margin: 2rem 0;
     font-weight: bold;
     text-align: center;
-    color: #355ebf;
+    color: #fff;
     font-size: 2.5rem;
+    border-radius: 5px;
 }
 .game-board{
     background: var(--tableroColor);
+    box-shadow: 0px 0px 106px 32px rgba(123,174,219,0.9);
     height: 400px;
     width: 400px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin: 1rem 1rem 4rem 1rem;
 }
 .square{
     overflow: hidden;
@@ -144,5 +158,16 @@ body{
     }
     .square{
         margin: 0;
+    }
+    .cross,
+    .circle{
+        height: 60px; width: 60px;
+    }
+    .circle{
+        border: 1rem solid #e70174;
+    }
+    .cross::before,
+    .cross::after {
+    height: 10px; /* cross thickness */
     }
 }

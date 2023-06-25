@@ -1,7 +1,7 @@
 // ==================== CONSTANTS ==================== //
 const infoDisplay = document.querySelector("#info") 
 const gameBoard = document.querySelector(".game-board");
-const GAME_BOXS = ["", "", "", "", "", "", "", "", ""],
+let GAME_BOXS = ["", "", "", "", "", "", "", "", ""],
     WINNINGS = [
         [0, 1, 2],
         [3, 4, 5],
@@ -11,11 +11,28 @@ const GAME_BOXS = ["", "", "", "", "", "", "", "", ""],
         [2, 5, 8],
         [0, 4, 8],
         [2, 4, 6]
-    ]
+    ],
+    btnRestart = document.querySelector("#btn-restart");
+
 let go = "circle";
 infoDisplay.textContent = "El Jugador 1 comienza primero (o)"
-let gameState=false
+let gameState=false,
     ganador=""
+
+btnRestart.addEventListener("click",()=>{
+    if ( gameBoard.hasChildNodes() )
+    {
+    while ( gameBoard.childNodes.length >= 1 )
+    {
+    gameBoard.removeChild( gameBoard.firstChild );
+    }
+    }
+    ganador=""
+    infoDisplay.textContent="El Jugador 1 comienza primero (o)"
+    GAME_BOXS = ["", "", "", "", "", "", "", "", ""]
+    go = "circle"
+    createBoard()
+})
 
 
 function createBoard(){
@@ -44,7 +61,6 @@ function checkScore(){
     const casillas = document.querySelectorAll(".square");
     WINNINGS.forEach(array=>{
         const circleWins=array.every(cell => GAME_BOXS[cell] === go)
-        console.log(go)
         if (circleWins){
             gameState=true;
             ganador=go;
