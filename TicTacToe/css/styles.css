@@ -1,7 +1,8 @@
 :root{
     --primario:#000;
-
-}
+    --tableroColor:#006399;
+    --casillaColor:#00a5f7;
+}   
 *{
     font-family: 'Comme', sans-serif;
     margin: 0;
@@ -27,7 +28,12 @@ html::-webkit-scrollbar-thumb{
     background: var(--white);
     border-radius: 5rem;
 }
-
+body{
+    background-image: url("../img/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 
 .container{
     width: 90%;
@@ -44,8 +50,19 @@ html::-webkit-scrollbar-thumb{
     flex-direction: column;
     height: 100vh;
 }
+.game__tictactoe h1{
+    font-size: 4rem;
+}
+.game__info{
+    padding: 0.5rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    text-align: center;
+    color: #355ebf;
+    font-size: 2.5rem;
+}
 .game-board{
-    background: rgba(129, 192, 89, 0.769);
+    background: var(--tableroColor);
     height: 400px;
     width: 400px;
     display: flex;
@@ -54,21 +71,71 @@ html::-webkit-scrollbar-thumb{
     align-items: center;
 }
 .square{
-    border: solid 1px #5ddd78;
+    overflow: hidden;
+    border: solid 1px #00b8ff;
     height: 30%;
     width: 30%;
     margin: 0.5rem;
-    background-color: #3cb35f;
+    background-color: var(--casillaColor);
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.square:hover{
+    background-color: #00efff;
+}
 
+/* PIEZAS */
 .circle{
     height: 90px; width: 90px;
     border-radius: 50%;
-    border: 1.5rem solid black;
+    border: 1.8rem solid #e70174;
 }
+.cross{
+    height: 90px; width: 90px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cross::before,
+.cross::after {
+    left: 0;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 25px; /* cross thickness */
+    background-color: #efe669;
+}
+
+.cross::before {
+    transform: rotate(45deg);
+}
+.cross::after {
+    transform: rotate(-45deg);
+}
+
+/* .cross::before,
+.cross::after{
+    content: "";
+    position: absolute;
+    background: red;
+}
+
+.cross::before{
+    left: 50%;
+    width: 30%;
+    margin-left: -15%;
+    height: 100%;
+}
+.cross::before{
+    left: 50%;
+    width: 30%;
+    margin-left: -15%;
+    height: 100%;
+} */
+
+
 
 @media (max-width: 380px){
     .game-board{
