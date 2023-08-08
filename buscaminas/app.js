@@ -5,8 +5,9 @@ let filas = 20,
     cellMark=0;
 
 let boardHtml="",
-    boardGame=[]
-    gameOver = false
+    boardGame=[],
+    minasPos=[],
+    gameOver = false,
     gameActive = false;
 
 function dobleClick(celda,c,f,e){
@@ -32,6 +33,7 @@ function clickSimple(celda,c,f,e){
             gameActive=true;
             break;
         case 1:
+            // botón scroll
             break;
         case 2:
             if(boardGame[f][c].estado == "marcado"){
@@ -56,9 +58,9 @@ function checkEvents(){
             celda.addEventListener("dblclick",(e)=>{
                 dobleClick(celda,j,i,e)
             }) 
-            celda.addEventListener("click",(e)=>{
+            celda.addEventListener("mouseup",(e)=>{
                 clickSimple(celda,j,i,e)
-                console.log(boardGame[i][j].valor)
+                // console.log(boardGame[i][j].estado)
             }) 
         }   
     }
@@ -85,10 +87,16 @@ function refreshBoard(){
     for (let i = 0; i < filas; i++) {
         for (let j = 0; j < columnas; j++) {
             let celda = document.querySelector(`#celda-${i}-${j}`);
+            if(!gameActive){
+                // Evitar que se actualice el tablero si el juego termino
+                return ;
+            }
             if(boardGame[i][j].estado == "descubierto"){
+                celda.style.boxShadow="none";
                 switch(boardGame[i][j].valor){
                     case -1:
-                        celda.innerHTML = "B";
+                        celda.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+                        celda.classList.add("bomb");
                         break;
                     case 0: 
                         break;
@@ -96,6 +104,28 @@ function refreshBoard(){
                         celda.innerHTML = boardGame[i][j].valor;
                         break;
                 }
+            }else if(boardGame[i][j].estado == "marcado"){
+                celda.innerHTML=`<i class="fa-solid fa-flag"></i>`;
+                celda.classList.add("flag");
+            }else{
+                celda.innerHTML=``;
+                celda.classList.remove("bomb","flag")
+            }
+
+            // verificar si hay una bomba visible
+            if(celda.classList.contains("bomb")){
+                document.querySelector("#board").classList.add("game_over");
+                gameActive=false;
+                let num=0
+                // revelar minas del tablero
+                minasPos.forEach(posMina => {
+                    const mina = document.querySelector(`#celda-${posMina[0]}-${posMina[1]}`);
+                    mina.classList.add("bomb");
+                    mina.classList.remove("flag");
+                    mina.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+                    mina.style.boxShadow="none";
+                    console.log(mina)
+                });
             }
         }
     }
@@ -123,6 +153,7 @@ function createMines(){
             f = Math.floor(Math.random()*filas)
         } while(boardGame[f][c] == -1)
         boardGame[f][c] = {valor: -1} 
+        minasPos.push([f,c]);
 
     }  
 }
@@ -131,6 +162,7 @@ function countMines(){
         for (let j = 0; j < columnas; j++) {
             if(boardGame[i][j] == undefined){
                 let contador = 0;
+                // contar bombas alrededor de una celda
                 for (let f = -1; f <= 1; f++) {
                     for (let c = -1; c <= 1; c++) {
                         if (f == 0 && c == 0) {
@@ -143,7 +175,7 @@ function countMines(){
                         } catch (e) {}
                     }
                 }
-                boardGame[i][j]={ valor: `${contador}`};
+                boardGame[i][j]={ valor:contador};
             }
         }
     }
