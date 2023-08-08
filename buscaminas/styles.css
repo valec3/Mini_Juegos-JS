@@ -1,15 +1,17 @@
-
 /*-----------------------------------*\
     #CUSTOM PROPERTY
 \*-----------------------------------*/
 
 :root{
     --international-orange-engineering: hsl(1, 91%, 37%);
+    --bg-smooth:#140f07;
+    --bg-board:#0e3058;
+    --border-cell:#0871bc;
+    --bg-cell:#08beff;
+    --border-cell-hv:#0ffff8;
 
     --shadow: 0px 0px 100px 0px hsl(216, 9%, 90%);
 }
-
-
 
 /*-----------------------------------*\
     #RESET
@@ -53,8 +55,9 @@ body{
     font-family: sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
+    user-select: none; /*Evita que el usuario pueda seleccionar contenido*/
+    background: var(--bg-smooth);
 
-    height: 1800vh;
 }
 
 :focus-visible{
@@ -77,91 +80,50 @@ body{
     #REUSED STYLE
 \*-----------------------------------*/
 .container{
-    max-width: 1200px ;
+    max-width: 95% ;
     margin: 0 auto;
 }
 /*-----------------------------------*\
     #HEADER
 \*-----------------------------------*/
-.header{
-    background-color: #000;
-    color: #19d6bd;
-    font-weight: bold;
-}
-.header .container{
+
+/*-----------------------------------*\
+    #GAME
+\*-----------------------------------*/
+.game{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-.navbar{
-    display: flex;
     justify-content: center;
-    padding: 1rem 0;
+    flex-direction: column;
 }
-.navbar a{
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    color: #fff;
-    position: relative;
-}
-.navbar a::before{
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 2px;
-    width: 0%;
-    background: #fff;
-    transition: width .3s;
-}
-.navbar a:hover{
-    color: #0ddefa;
-}
-.navbar a:hover::before{
+.game h1{
     width: 100%;
-}
-/*-----------------------------------*\
-    #GAMES
-\*-----------------------------------*/
-
-main .games{
-    padding: 2rem;
-    display: flex;
-    gap: 2rem;
-    justify-content: space-evenly;
-}
-.games .card{
-    border: 2px solid #ccc;
-    padding: 1rem;
+    margin: 2rem;
     text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    border-bottom: 1px solid var(--border-cell);
 }
-.games .card:hover{
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+.game_board{
+    
+    border: solid 1px var(--border-cell);
+    background: var(--bg-board);
+    padding: 2rem;
+    box-shadow: 0px 0px 28px 8px rgba(255, 255, 255, 0.2);
 }
-
-
-/*-----------------------------------*\
-    #SERVICE
-\*-----------------------------------*/
-
-/*-----------------------------------*\
-    #ABOUT
-\*-----------------------------------*/
-
-/*-----------------------------------*\
-    #WORK
-\*-----------------------------------*/
-
-
-/*-----------------------------------*\
-    #FOOTER
-\*-----------------------------------*/
-
-
-
+.game_board .cell{
+    background: var(--bg-cell);
+    border: solid 1px var(--border-cell);
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;    
+    cursor: pointer;
+}
+.game_board .cell:hover{
+    background: var(--border-cell-hv);
+}
 /*-----------------------------------*\
     #MEDIA QUERIES
 \*-----------------------------------*/

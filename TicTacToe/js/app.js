@@ -27,11 +27,12 @@ btnRestart.addEventListener("click",()=>{
     gameBoard.removeChild( gameBoard.firstChild );
     }
     }
-    ganador=""
-    infoDisplay.textContent="El Jugador 1 comienza primero (o)"
-    GAME_BOXS = ["", "", "", "", "", "", "", "", ""]
-    go = "circle"
-    createBoard()
+    ganador="";
+    infoDisplay.textContent="El Jugador 1 comienza primero (o)";
+    GAME_BOXS = ["", "", "", "", "", "", "", "", ""];
+    go = "circle";
+    createBoard();
+    gameState=false;
 })
 
 
@@ -55,7 +56,7 @@ function addGo(e){
     GAME_BOXS[Number(e.target.id)] = go;
     checkScore()
     go = go==="circle" ?"cross":"circle";
-    infoDisplay.textContent=gameState ? ganador + " gano el juego":"ahora es el turno de "+go;
+    infoDisplay.textContent=gameState ? ganador + " gano el juego":"Ahora es el turno de "+go;
 }
 function checkScore(){
     const casillas = document.querySelectorAll(".square");
