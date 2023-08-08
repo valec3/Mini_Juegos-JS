@@ -58,7 +58,7 @@ function checkEvents(){
             }) 
             celda.addEventListener("click",(e)=>{
                 clickSimple(celda,j,i,e)
-                console.log(boardGame[i][j].estado)
+                console.log(boardGame[i][j].valor)
             }) 
         }   
     }
@@ -130,21 +130,29 @@ function countMines(){
     for (let i = 0; i < filas; i++) {
         for (let j = 0; j < columnas; j++) {
             if(boardGame[i][j] == undefined){
-                boardGame[i][j]={ valor: 0};
+                let contador = 0;
+                for (let f = -1; f <= 1; f++) {
+                    for (let c = -1; c <= 1; c++) {
+                        if (f == 0 && c == 0) {
+                            continue
+                        }
+                        try { //hay que evitar errores con las posiciones negativas
+                            if (boardGame[f + i][c + j].valor == -1) {
+                            contador++;
+                            }
+                        } catch (e) {}
+                    }
+                }
+                boardGame[i][j]={ valor: `${contador}`};
             }
-            boardGame[i][j].estado=undefined; /*erase*/
         }
     }
-    console.log("crear tablero array")
-    console.log(boardGame)
 }
 
 function createBoardGame(){
     clearBoard();
     createMines();
     countMines();
-    console.log("createBoardGame")
-    console.log(boardGame)
 }
 // INICIAR
 newGame()
