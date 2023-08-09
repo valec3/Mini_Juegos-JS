@@ -126,20 +126,38 @@ body{
 /*-----------------------------------*\
     #GAMES
 \*-----------------------------------*/
-
+main h1{
+    text-align: center;
+    margin: 5px 0;
+    background: linear-gradient(#0ddefa,#0f33e8);
+    background-clip: text   ;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
 main .games{
     padding: 2rem;
     display: flex;
     gap: 2rem;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+main .games article{
+    width: 340px;
 }
 .games .card{
     border: 2px solid #ccc;
-    padding: 1rem;
     text-align: center;
+}
+.games .card h2{
+    font-size: 2rem;
+    padding: .5rem 0;
 }
 .games .card:hover{
     box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+}
+.games .card_img img{
+    height: 180px;
+    object-fit: cover;
 }
 
 

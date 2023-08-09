@@ -49,15 +49,13 @@ address{
 }
 html{
     scroll-behavior: smooth;
-    font-size: 10px;
+    font-size: 100%;
 }
 body{
     font-family: sans-serif;
-    font-size: 1.6rem;
-    line-height: 1.5;
     user-select: none; /*Evita que el usuario pueda seleccionar contenido*/
     background: var(--bg-smooth);
-
+    overflow: auto;
 }
 
 :focus-visible{
@@ -87,18 +85,40 @@ body{
     #HEADER
 \*-----------------------------------*/
 
+.controls{
+    display: flex;
+    justify-content: space-evenly;
+    padding: .5rem 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+.controls p{
+    background: var(--bg-cell);
+    color: #000;
+    border-radius: 2rem;
+    padding: 0.2rem 1rem;
+    cursor: pointer;
+    margin: 5px 0;
+    border:  3px solid transparent ;
+}
+.controls p:active{
+    border:  3px solid  var(--border-cell);
+}
+
 /*-----------------------------------*\
     #GAME
 \*-----------------------------------*/
 .game{
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    min-width: max-content;
 }
 .game h1{
     width: 100%;
-    margin: 2rem;
+    margin-top: .8rem;
     text-align: center;
     text-transform: uppercase;
     color: #fff;
@@ -108,7 +128,7 @@ body{
     
     border: solid 1px var(--border-cell);
     background: var(--bg-board);
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0px 0px 28px 8px rgba(255, 255, 255, 0.2);
 }
 .game_board.game_over{
@@ -127,7 +147,7 @@ body{
     width: 40px;
     text-align: center;
     cursor: pointer;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     box-shadow: inset 4px 4px 0 0 rgba(255, 255, 255, .27),inset -4px -4px 0 0 rgba(0, 0, 0, .27);    
 }
@@ -142,6 +162,42 @@ body{
 .game_board .cell:hover{
     background: var(--border-cell-hv);
 }
+
+
+
+
+
 /*-----------------------------------*\
     #MEDIA QUERIES
 \*-----------------------------------*/
+
+@media (max-width: 1200px){
+    html{
+        font-size: 70%;
+    }
+    .game_board .cell{
+        height: 35px;
+        width: 35px;
+    }
+}
+
+@media (max-width: 790px){
+    html{
+        font-size: 50%;
+    }
+    .game_board .cell{
+        height: 20px;
+        width: 20px;
+    }
+}
+
+@media (max-width: 470px){
+    html{
+        font-size: 50%;
+    }
+    .game_board .cell{
+        height: 17px;
+        width: 17px;
+        box-shadow: inset 2px 2px 0 0 rgba(255, 255, 255, .27),inset -2px -2px 0 0 rgba(0, 0, 0, .27);
+    }
+}
