@@ -124,13 +124,14 @@ function createBoard(){
     
 }
 function refreshBoard(){
+    if(!gameActive){
+        // Evitar que se actualice el tablero si el juego termino
+        return ;
+    }
+    
     for (let i = 0; i < filas; i++) {
         for (let j = 0; j < columnas; j++) {
             let celda = document.querySelector(`#celda-${i}-${j}`);
-            if(!gameActive){
-                // Evitar que se actualice el tablero si el juego termino
-                return ;
-            }
             if(boardGame[i][j].estado == "descubierto"){
                 celda.style.boxShadow="none";
                 switch(boardGame[i][j].valor){
@@ -231,7 +232,7 @@ function createBoardGame(){
     createMines();
     countMines();
 }
-
+//  Funcion para el modal de configuraciones
 async function ajustes() {
     const {
       value: ajustes
@@ -272,7 +273,7 @@ async function ajustes() {
     columnas = Math.floor(ajustes.columnas)
     numMinas = Math.floor(columnas * filas * ajustes.dificultad / 100)
     newGame()
-  }
+}
 
 
 
